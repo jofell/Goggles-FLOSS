@@ -1,0 +1,8 @@
+<parameters>
+<index>$PATH_INDEX_KEY</index>
+<retModel>tfidf</retModel>
+<textQuery>$PATH_QUERY</textQuery>
+<resultFile>$PATH_RESULT</resultFile>
+<TRECResultFormat>1</TRECResultFormat>
+<resultCount>$NUMBER_RESULTS</resultCount>
+</parameters>

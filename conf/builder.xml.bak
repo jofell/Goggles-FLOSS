@@ -1,0 +1,10 @@
+<parameters> 
+	<acronyms></acronyms> 
+	<countStopWords>false</countStopWords> 
+	<dataFiles>$PATH_FILE_LIST</dataFiles> 
+	<docFormat>trec</docFormat> 
+	<index>$PATH_DEST_INDEX</index> 
+	<indexType>key</indexType> 
+	<stemmer></stemmer> 
+	<stopwords></stopwords> 
+</parameters>

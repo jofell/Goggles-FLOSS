@@ -1,0 +1,10 @@
+{
+    "command": {
+        "id": "1",
+        "name": "add_photo",
+        "params": {
+            "id_photo" : "$ID_PHOTO",
+            "path_photo" : "$PATH_PHOTO" 
+        } 
+    }
+}

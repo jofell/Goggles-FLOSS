@@ -1,0 +1,131 @@
+Introduction
+============
+
+Goggles FLOSS is a service that allow compare thousand of images very
+fast. This project is similar to Google Goggles but with FLOSS
+technologies. This projects uses the next FLOSS technologies:
+
+ * openCV: Use SURF extractors to obtain the interesting points of the
+   images.
+ * Twisted: is an event-driven networking engine written in Python and
+   licensed under the MIT license.
+ * FLANN: is a library for performing fast approximate nearest
+   neighbor searches in high dimensional spaces. It contains a
+   collection of algorithms we found to work best for nearest neighbor
+   search and a system for automatically choosing the best algorithm
+   and optimum parameters depending on the dataset.
+ * Lemur: The Lemur Project develops search engines, browser toolbars,
+   text analysis tools, and data resources that support research and
+   development of information retrieval and text mining software
+   
+
+Use Case: Android
+=================
+
+Thanks to twisted, GogglesFLOSS can execute as web service and, for
+example, we can develope a simple application to send photos taken
+with the mobile and search in all images database. You can see this
+use case in the next video:
+
+http://www.youtube.com/watch?v=dlWViWgKUcY
+ 
+
+Manual:
+
+1. Start the server
+
+rocapal@vega:~$ cd workspace/gogglesFLOSS/src 
+rocapal@vega:~/workspace/gogglesFLOSS/src$ twistd -n -y gogglesFLOSSd.py 
+Removing stale pidfile /home/rocapal/workspace/gogglesFLOSS/src/twistd.pid 
+Initializing gogglesFLOSSd ... 
+[gogglesFLOSSd] - Initializing 
+SOAP service [gogglesFLOSSd] -  SOAP service initialized 
+<2010-10-23 18:59:19+0200 [-]  Log opened. 
+>2010-10-23 18:59:19+0200 [-] twistd 10.1.0 (/usr/bin/python 2.6.6) starting up.
+2010-10-23 18:59:19+0200 [-] reactor class: twisted.internet.selectreactor.SelectReactor. 
+2010-10-23 18:59:19+0200 [-] twisted.web.server.Site starting on 9085 
+2010-10-23 18:59:19+0200 [-] Starting factory
+
+ 
+
+2. Explore the client options:
+
+rocapal@vega:~/workspace/gogglesFLOSS/client$ ./gogglesFLOSS-client.py 
+Usage: ./gogglesFLOSS-client.py
+
+Options:
+-a add photos:
+   -f specified the JSON file
+   -d specified the images directory
+
+-q send query file
+-g generate the image index
+ 
+
+3. Load images from directory
+
+rocapal@vega:~/client$ ./gogglesFLOSS-client.py http://0.0.0.0:9085 -a -d /tmp/images/photos/
+Sending photo 'c3938d4492935519d5a58238f805d58c[thumb].jpeg' ... 
+Sending photo 'c3938d4492935519d5a58238f805d58c' ... 
+[....]
+
+ 
+
+4. Image query
+
+First, it's neccesary build a JSON file to make the query. The JSON file is simple:
+
+{ 
+  "command": { 
+     "id": "2", 
+     "name": "query_photo", 
+     "params": { 
+        "path_photo" : "/tmp/093e81245f99de65285df424bc153d87" 
+     } 
+  }
+}
+
+And later, launch the query:
+
+rocapal@vega:~/client$ ./gogglesFLOSS-client.py http://0.0.0.0:9085 -q query_photo.json 
+
+{ "code" : "200" , 
+    "results": 
+       [{"id": "1057", "range" : "1550.25" },
+        {"id": "1058", "range" : "562.689" },
+        {"id": "1067", "range" : "311.051" },
+        {"id": "1054", "range" : "310.265" },
+        {"id": "1066", "range" : "280.508" },
+        {"id": "1062", "range" : "250.856" },
+        {"id": "1055", "range" : "245.079" },
+        {"id": "1049", "range" : "239.380" },
+        {"id": "1053", "range" : "239.357" },
+        {"id": "1056", "range" : "217.369" }]
+}
+
+ 
+
+As you seen, the query returns a list of ten images more similar to
+query. The first field 'id' means the image identifier, remember that
+it's necessary that you assign an id to each image when you added
+it. So, you are the responsible to do the matching to obtain the image
+file. The second field, 'range', means the similitude in numeric
+terms, as a bigger number better results!.
+
+ 
+
+Developers
+==========
+
+If you can see or collaborate with the source code, you can download it from our git repository:
+
+Git: http://git.libresoft.es/gogglesFLOSS/
+ 
+
+Bugs & Problems
+===============
+
+Lemur does't seem to work very well in some situations. If there are
+several images with a high different of keypoints number (for example
+image with 200 keypoints and other images with 3500 keypoints). It's
+possible that results may be incorrects.

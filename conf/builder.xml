@@ -1,0 +1,9 @@
+<parameters>
+    <index>$PATH_DEST_INDEX</index>
+    <memory>1G</memory>
+    <corpus>
+      <path>$PATH_FILE_LIST</path>
+      <class>trectext</class>
+    </corpus>
+    <stemmer>krovetz</stemmer>
+</parameters>

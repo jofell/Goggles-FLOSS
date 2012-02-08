@@ -1,0 +1,13 @@
+<parameters>
+  <index>$PATH_INDEX_KEY</index>
+  <count>$NUMBER_RESULTS</count>
+  <!--baseline>tfidf,k1:1.0,b:0.3</baseline-->
+  <trecFormat>true</trecFormat>
+  <query>
+    <type>indri</type>
+    <number>101</number>
+    <text>
+      #combine( $PATH_QUERY )
+    </text>
+  </query>
+</parameters>

@@ -1,0 +1,10 @@
+{
+    "command": {
+        "id": "2",
+        "name": "query_photo",
+        "params": {            
+            "path_photo" : "/home/rocapal/libresoft/social-network/private/work/feature-detection/python/images/fotos_500/4948902538_cafee087e0.jpg" 
+        } 
+    }
+}
+
